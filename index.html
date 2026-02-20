@@ -1,0 +1,2576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammad Abo Al Ghozlan — Full Stack Developer</title>
+  <meta name="description" content="Full Stack Web Developer specializing in Laravel, React, and production business systems. Experience delivering ERP, POS, and SaaS platforms for clients in Lebanon, Saudi Arabia, and UAE." />
+  <meta name="keywords" content="Full Stack Developer, Laravel, React, PHP, MySQL, Lebanon, Web Developer, Backend Developer" />
+  <meta name="author" content="Mohammad Abo Al Ghozlan" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mohammad Abo Al Ghozlan — Full Stack Developer" />
+  <meta property="og:description" content="Full Stack Web Developer specializing in Laravel, React, and production business systems." />
+  <meta property="og:url" content="https://mhmd-ghozaln.vercel.app" />
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================
+       CSS CUSTOM PROPERTIES — COLOR SYSTEM
+    ============================================ */
+    :root {
+      /* Navy primary palette */
+      --navy-900: #0A0F1E;
+      --navy-800: #0D1426;
+      --navy-700: #111B35;
+      --navy-600: #162044;
+      --navy-500: #1A2754;
+      --navy-400: #243870;
+      --navy-300: #2E4A8E;
+
+      /* Neutral surface palette */
+      --surface-0: #F8F9FC;
+      --surface-1: #F0F2F8;
+      --surface-2: #E4E8F2;
+      --surface-3: #CDD4E8;
+      --surface-4: #A0AECB;
+
+      /* Text */
+      --text-primary: #0D1426;
+      --text-secondary: #3D4E72;
+      --text-muted: #6C7FA6;
+      --text-inverse: #F8F9FC;
+      --text-inverse-muted: rgba(248,249,252,0.65);
+
+      /* Accent — teal-green for CTA */
+      --accent: #00B894;
+      --accent-dark: #00917A;
+      --accent-light: #E0F8F3;
+      --accent-glow: rgba(0,184,148,0.18);
+
+      /* UI */
+      --border: #DDE3F0;
+      --border-dark: #C4CEEA;
+      --shadow-sm: 0 1px 4px rgba(13,20,38,0.06);
+      --shadow-md: 0 4px 16px rgba(13,20,38,0.10);
+      --shadow-lg: 0 12px 40px rgba(13,20,38,0.14);
+
+      /* Typography */
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-mono: 'DM Mono', monospace;
+
+      /* Spacing */
+      --section-gap: 100px;
+      --radius: 10px;
+      --radius-lg: 16px;
+      --transition: 0.22s ease;
+    }
+
+    /* ============================================
+       RESET & BASE
+    ============================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--surface-0);
+      color: var(--text-primary);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+    img { max-width: 100%; height: auto; }
+
+    ::selection { background: var(--accent-light); color: var(--navy-800); }
+
+    /* ============================================
+       UTILITY CLASSES
+    ============================================ */
+    .section-gap { padding-top: var(--section-gap); padding-bottom: var(--section-gap); }
+    .bg-dark-navy { background-color: var(--navy-800); }
+    .bg-navy { background-color: var(--navy-700); }
+    .text-muted-custom { color: var(--text-muted); }
+    .text-accent { color: var(--accent); }
+    .font-mono { font-family: var(--font-mono); }
+
+    .badge-tech {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+
+    .badge-tech.accent {
+      background: var(--accent-light);
+      border-color: rgba(0,184,148,0.3);
+      color: var(--accent-dark);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    /* Divider line */
+    .section-divider {
+      width: 36px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 99px;
+      margin: 14px 0 32px;
+    }
+
+    /* Scroll reveal utility */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================
+       NAVBAR
+    ============================================ */
+    #mainNav {
+      background: rgba(10, 15, 30, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: box-shadow var(--transition);
+      z-index: 1050;
+    }
+
+    #mainNav.scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-inverse) !important;
+      letter-spacing: -0.01em;
+    }
+
+    .navbar-brand span {
+      color: var(--accent);
+    }
+
+    .nav-link {
+      color: var(--text-inverse-muted) !important;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 6px 14px !important;
+      border-radius: 6px;
+      transition: color var(--transition), background var(--transition);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-inverse) !important;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .nav-link.active {
+      color: var(--accent) !important;
+    }
+
+    .navbar-toggler {
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 10px;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28248,249,252,0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    .btn-nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      border-radius: 6px;
+      padding: 6px 18px !important;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .btn-nav-cta:hover {
+      background: var(--accent-dark) !important;
+      color: #fff !important;
+    }
+
+    /* ============================================
+       HERO SECTION WITH PHOTO
+    ============================================ */
+    #hero {
+      background: var(--navy-900);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 0 80px;
+    }
+
+    /* Grid background pattern */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    /* Glow orb */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,184,148,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .hero-name {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .hero-role {
+      font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+      font-weight: 400;
+      color: var(--text-inverse-muted);
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .hero-role strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .hero-pitch {
+      font-size: 1.05rem;
+      color: rgba(248,249,252,0.6);
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 52px;
+    }
+
+    .btn-primary-cta {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary-cta:hover {
+      background: var(--accent-dark);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,184,148,0.35);
+    }
+
+    .btn-secondary-cta {
+      background: transparent;
+      color: var(--text-inverse);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color var(--transition), background var(--transition), transform var(--transition);
+    }
+
+    .btn-secondary-cta:hover {
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .hero-stat {
+      border-left: 2px solid rgba(0,184,148,0.4);
+      padding-left: 14px;
+    }
+
+    .hero-stat-value {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-inverse-muted);
+      font-weight: 400;
+    }
+
+    /* Hero right column — Photo and info card */
+    .hero-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(8px);
+    }
+
+    .profile-image-wrapper {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .profile-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .availability-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      animation: pulse 2s infinite;
+      display: inline-block;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px var(--accent-glow); }
+      50% { box-shadow: 0 0 0 6px transparent; }
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .hero-meta-item:last-child { margin-bottom: 0; }
+
+    .hero-meta-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(0,184,148,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .hero-meta-label {
+      font-size: 0.75rem;
+      color: var(--text-inverse-muted);
+      margin-bottom: 2px;
+    }
+
+    .hero-meta-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* ============================================
+       EXPERTISE SECTION
+    ============================================ */
+    #expertise {
+      background: #fff;
+    }
+
+    .expertise-card {
+      background: var(--surface-0);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      height: 100%;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .expertise-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .expertise-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: var(--navy-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+    }
+
+    .expertise-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .expertise-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* ============================================
+       PROJECTS SECTION
+    ============================================ */
+    #projects {
+      background: var(--surface-0);
+    }
+
+    .project-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 16px;
+      transition: box-shadow var(--transition);
+    }
+
+    .project-item:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 28px;
+      cursor: pointer;
+      user-select: none;
+      gap: 16px;
+      transition: background var(--transition);
+    }
+
+    .project-header:hover {
+      background: var(--surface-0);
+    }
+
+    .project-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .project-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: var(--navy-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .project-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+
+    .project-tagline {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .project-chevron {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+
+    .project-item.open .project-chevron {
+      transform: rotate(180deg);
+    }
+
+    .project-body {
+      display: none;
+      border-top: 1px solid var(--border);
+      padding: 28px;
+      background: var(--surface-0);
+    }
+
+    .project-item.open .project-body {
+      display: block;
+    }
+
+    /* Case study grid */
+    .case-study-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .case-study-block {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+
+    .cs-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cs-label i { font-size: 0.8rem; }
+
+    .cs-content {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .outcome-highlight {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 18px;
+      margin-top: 4px;
+    }
+
+    .outcome-highlight p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       EXPERIENCE SECTION
+    ============================================ */
+    #experience {
+      background: #fff;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--border));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 36px;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -28px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--surface-0);
+      border: 2.5px solid var(--border);
+      transition: border-color var(--transition);
+    }
+
+    .timeline-item:first-child .timeline-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .timeline-card {
+      background: var(--surface-0);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      transition: box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .timeline-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-dark);
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .timeline-role {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .timeline-company {
+      font-size: 0.88rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .timeline-period {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--surface-2);
+      padding: 3px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    .timeline-location {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .timeline-bullets {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .timeline-bullets li {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      padding: 4px 0 4px 18px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .timeline-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    /* ============================================
+       STRENGTHS SECTION
+    ============================================ */
+    #strengths {
+      background: var(--navy-800);
+    }
+
+    .strength-item {
+      display: flex;
+      gap: 18px;
+      padding: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      height: 100%;
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .strength-item:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(0,184,148,0.3);
+    }
+
+    .strength-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(0,184,148,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .strength-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    .strength-desc {
+      font-size: 0.84rem;
+      color: var(--text-inverse-muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ============================================
+       CONTACT SECTION
+    ============================================ */
+    #contact {
+      background: var(--surface-0);
+    }
+
+    .contact-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .contact-info-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy-700);
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
+    .contact-info-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .contact-info-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .btn-copy {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color var(--transition), border-color var(--transition), background var(--transition);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .btn-copy:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* Form styles */
+    .form-label {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .form-control, .form-select {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      padding: 10px 14px;
+      background: var(--surface-0);
+      color: var(--text-primary);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      background: #fff;
+    }
+
+    .form-control.is-invalid {
+      border-color: #dc3545;
+    }
+
+    .form-control.is-valid {
+      border-color: var(--accent);
+    }
+
+    textarea.form-control { resize: vertical; min-height: 120px; }
+
+    .btn-submit {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 12px 32px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .btn-submit:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0,184,148,0.35);
+    }
+
+    .form-success {
+      display: none;
+      background: var(--accent-light);
+      border: 1px solid rgba(0,184,148,0.3);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      color: var(--accent-dark);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: var(--navy-900);
+      padding: 40px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-text {
+      font-size: 0.84rem;
+      color: var(--text-inverse-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-links a {
+      font-size: 0.84rem;
+      color: var(--text-inverse-muted);
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-inverse-muted);
+      font-size: 1.05rem;
+      transition: color var(--transition), background var(--transition), border-color var(--transition);
+    }
+
+    .social-link:hover {
+      color: var(--accent);
+      background: rgba(0,184,148,0.1);
+      border-color: var(--accent);
+    }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 768px) {
+      :root { --section-gap: 64px; }
+
+      .hero-name { font-size: 2.1rem; }
+      .hero-stats { gap: 20px; }
+      .project-tags { display: none; }
+      .contact-card { padding: 24px; }
+      .case-study-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 576px) {
+      .timeline { padding-left: 22px; }
+      .timeline::before { left: 5px; }
+      .timeline-dot { left: -22px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================
+       NAVBAR
+  ============================================ -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand" href="#hero">
+        Mo<span>Ghoz</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="#expertise">Expertise</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#strengths">Strengths</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link btn-nav-cta" href="#contact">Hire Me</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION WITH PHOTO
+  ============================================ -->
+  <section id="hero" role="banner">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <!-- Left: Copy -->
+        <div class="col-lg-7">
+          <div class="hero-eyebrow">Available for new opportunities</div>
+
+          <h1 class="hero-name">Mohammad Abo<br/>Al Ghozlan</h1>
+
+          <p class="hero-role">
+            <strong>Full Stack Web Developer</strong> — Building production-grade<br/>
+            business systems with Laravel, React &amp; MySQL.
+          </p>
+
+          <p class="hero-pitch">
+            Highly motivated Full Stack Web & Mobile Developer with hands-on experience in freelance projects 
+            and real-world business applications. Passionate about continuous learning and solving modern 
+            security challenges.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#contact" class="btn-primary-cta">
+              <i class="bi bi-send-fill" aria-hidden="true"></i>
+              Get in Touch
+            </a>
+            <a href="#projects" class="btn-secondary-cta">
+              <i class="bi bi-grid-3x3-gap" aria-hidden="true"></i>
+              View Case Studies
+            </a>
+            <a href="images/Mohammad Abo Al Ghozlan - resume.pdf" download class="btn-secondary-cta">
+              <i class="bi bi-download" aria-hidden="true"></i>
+              Download CV
+            </a>
+          </div>
+          <style>
+            /* Add to your <style> section */
+.hero-cta-group {
+  position: relative;
+  z-index: 10;
+}
+
+.hero-cta-group a {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+          </style>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-value">2+</div>
+              <div class="hero-stat-label">Years Experience</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">15+</div>
+              <div class="hero-stat-label">Projects Completed</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">15+</div>
+              <div class="hero-stat-label">Happy Clients</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">18</div>
+              <div class="hero-stat-label">Certifications</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Photo and Info card -->
+        <div class="col-lg-5">
+          <div class="hero-card">
+            <div class="profile-image-wrapper">
+              <img src="images/20251025_0938462.jpg" alt="Mohammad Abo Al Ghozlan" />
+            </div>
+            
+            <div class="d-flex align-items-center justify-content-center gap-2 mb-4">
+              <span class="availability-dot" aria-label="Available"></span>
+              <span style="font-size:0.82rem;color:rgba(248,249,252,0.6);font-weight:500;">
+                Open to full-time &amp; contract roles
+              </span>
+            </div>
+
+            <div class="hero-meta-item">
+              <div class="hero-meta-icon"><i class="bi bi-geo-alt-fill"></i></div>
+              <div>
+                <div class="hero-meta-label">Location</div>
+                <div class="hero-meta-value">Lebanon</div>
+              </div>
+            </div>
+
+            <div class="hero-meta-item">
+              <div class="hero-meta-icon"><i class="bi bi-tools"></i></div>
+              <div>
+                <div class="hero-meta-label">Primary Stack</div>
+                <div class="hero-meta-value">Laravel · React · PHP · MySQL</div>
+              </div>
+            </div>
+
+            <div class="hero-meta-item">
+              <div class="hero-meta-icon"><i class="bi bi-briefcase-fill"></i></div>
+              <div>
+                <div class="hero-meta-label">Role Type</div>
+                <div class="hero-meta-value">Full Stack · Team Lead</div>
+              </div>
+            </div>
+
+            <div class="hero-meta-item">
+              <div class="hero-meta-icon"><i class="bi bi-globe2"></i></div>
+              <div>
+                <div class="hero-meta-label">Languages</div>
+                <div class="hero-meta-value">Arabic · English</div>
+              </div>
+            </div>
+
+            <div class="hero-meta-item">
+              <div class="hero-meta-icon"><i class="bi bi-envelope-fill"></i></div>
+              <div>
+                <div class="hero-meta-label">Email</div>
+                <div class="hero-meta-value">abo.al.ghozlan.mohammad@gmail.com</div>
+              </div>
+            </div>
+
+            <hr style="border-color:rgba(255,255,255,0.08);margin:20px 0;" />
+
+            <div class="d-flex gap-2 flex-wrap justify-content-center">
+              <a href="https://www.linkedin.com/in/mohammad-abo-al-ghozlan" target="_blank" rel="noopener"
+                 class="btn-secondary-cta" style="font-size:0.82rem;padding:8px 16px;">
+                <i class="bi bi-linkedin"></i> LinkedIn
+              </a>
+              <a href="https://github.com/Mohammad-Abo-Al-Ghozlan" target="_blank" rel="noopener"
+                 class="btn-secondary-cta" style="font-size:0.82rem;padding:8px 16px;">
+                <i class="bi bi-github"></i> GitHub
+              </a>
+              <a href="https://wa.me/96181985614" target="_blank" rel="noopener"
+                 class="btn-secondary-cta" style="font-size:0.82rem;padding:8px 16px;">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       EXPERTISE SECTION
+  ============================================ -->
+  <section id="expertise" class="section-gap" aria-labelledby="expertise-heading">
+    <div class="container">
+
+      <div class="reveal">
+        <span class="section-label">Technical Foundation</span>
+        <h2 class="section-title" id="expertise-heading">Engineering Expertise</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle mb-5">
+          Grouped by domain — each area represents hands-on, production-tested capability.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Frontend -->
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="expertise-card">
+            <div class="expertise-icon"><i class="bi bi-layout-text-sidebar-reverse" aria-hidden="true"></i></div>
+            <div class="expertise-title">Frontend Engineering</div>
+            <p class="expertise-desc">Building responsive, accessible interfaces that non-technical clients can use confidently.</p>
+            <div class="skill-tags">
+              <span class="badge-tech accent">React.js</span>
+              <span class="badge-tech">Angular</span>
+              <span class="badge-tech">JavaScript</span>
+              <span class="badge-tech">TypeScript</span>
+              <span class="badge-tech">Bootstrap</span>
+              <span class="badge-tech">Tailwind</span>
+              <span class="badge-tech">HTML5 / CSS3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="expertise-card">
+            <div class="expertise-icon"><i class="bi bi-server" aria-hidden="true"></i></div>
+            <div class="expertise-title">Backend Architecture</div>
+            <p class="expertise-desc">Designing scalable REST APIs, auth systems, and multi-tenant business logic.</p>
+            <div class="skill-tags">
+              <span class="badge-tech accent">Laravel</span>
+              <span class="badge-tech">PHP</span>
+              <span class="badge-tech">Python</span>
+              <span class="badge-tech">Node.js</span>
+              <span class="badge-tech">REST APIs</span>
+              <span class="badge-tech">RBAC / Auth</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="expertise-card">
+            <div class="expertise-icon"><i class="bi bi-phone-fill" aria-hidden="true"></i></div>
+            <div class="expertise-title">Mobile Development</div>
+            <p class="expertise-desc">Cross-platform mobile applications with Flutter and native integrations.</p>
+            <div class="skill-tags">
+              <span class="badge-tech accent">Flutter</span>
+              <span class="badge-tech">Dart</span>
+              <span class="badge-tech">Firebase</span>
+              <span class="badge-tech">REST API</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Databases & DevOps -->
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="expertise-card">
+            <div class="expertise-icon"><i class="bi bi-cloud-arrow-up-fill" aria-hidden="true"></i></div>
+            <div class="expertise-title">Databases & DevOps</div>
+            <p class="expertise-desc">Designing relational schemas, query optimization, and deployment pipelines.</p>
+            <div class="skill-tags">
+              <span class="badge-tech accent">MySQL</span>
+              <span class="badge-tech">Firebase</span>
+              <span class="badge-tech">Docker</span>
+              <span class="badge-tech">Git</span>
+              <span class="badge-tech">Postman</span>
+              <span class="badge-tech">Linux</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- Skills Tags -->
+      <div class="reveal mt-5">
+        <div style="background:var(--surface-0);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
+          <div class="cs-label mb-3" style="color:var(--accent);">
+            <i class="bi bi-tags-fill"></i> All Technologies
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge-tech">HTML</span>
+            <span class="badge-tech">CSS</span>
+            <span class="badge-tech">PHP</span>
+            <span class="badge-tech">XML</span>
+            <span class="badge-tech">Bootstrap</span>
+            <span class="badge-tech">Tailwind</span>
+            <span class="badge-tech">JavaScript</span>
+            <span class="badge-tech">TypeScript</span>
+            <span class="badge-tech">Dart</span>
+            <span class="badge-tech">Java</span>
+            <span class="badge-tech">C</span>
+            <span class="badge-tech">C#</span>
+            <span class="badge-tech">C++</span>
+            <span class="badge-tech">Prolog</span>
+            <span class="badge-tech">Python</span>
+            <span class="badge-tech">ReactJS</span>
+            <span class="badge-tech">Laravel</span>
+            <span class="badge-tech">Angular</span>
+            <span class="badge-tech">.Net</span>
+            <span class="badge-tech">Flutter</span>
+            <span class="badge-tech">WordPress</span>
+            <span class="badge-tech">MySQL</span>
+            <span class="badge-tech">Firebase</span>
+            <span class="badge-tech">Git</span>
+            <span class="badge-tech">Docker</span>
+            <span class="badge-tech">Postman</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       PROJECTS SECTION (with all projects from index)
+  ============================================ -->
+  <section id="projects" class="section-gap" aria-labelledby="projects-heading">
+    <div class="container">
+
+      <div class="reveal">
+        <span class="section-label">Selected Work</span>
+        <h2 class="section-title" id="projects-heading">Featured Projects</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle mb-5">
+          Each project documented as a case study: problem, approach, architecture, and impact.
+        </p>
+      </div>
+
+      <!-- Project 1: Momento Occasions -->
+      <div class="project-item reveal" role="region" aria-label="Momento Occasions case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj1-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-building" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">Momento Occasions</div>
+              <div class="project-tagline">Corporate website for a Saudi Arabian construction company</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">ReactJS</span>
+            <span class="badge-tech">HTML</span>
+            <span class="badge-tech">CSS</span>
+            <span class="badge-tech">Bootstrap</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj1-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Overview</div>
+              <div class="cs-content">
+                Corporate website showcasing services and projects for a Saudi Arabian construction company.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech accent">ReactJS</span>
+                  <span class="badge-tech">HTML</span>
+                  <span class="badge-tech">CSS</span>
+                  <span class="badge-tech">Bootstrap</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="outcome-highlight">
+            <div class="cs-label mb-2"><i class="bi bi-link"></i> Links</div>
+            <div class="d-flex gap-3">
+              <a href="https://momento-occasions.vercel.app/" target="_blank" class="btn-primary-cta" style="padding:8px 16px;font-size:0.85rem;">
+                <i class="bi bi-box-arrow-up-right"></i> Live Demo
+              </a>
+              <a href="https://github.com/Mohammad-Abo-Al-Ghozlan/momento-occasions.git" target="_blank" class="btn-secondary-cta" style="padding:8px 16px;font-size:0.85rem;">
+                <i class="bi bi-github"></i> View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: ATCC-KSA -->
+      <div class="project-item reveal" role="region" aria-label="ATCC-KSA case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj2-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-buildings" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">AFKAR AL-TATWEER (ATCC-KSA)</div>
+              <div class="project-tagline">Corporate website for a Saudi Arabian company</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">HTML</span>
+            <span class="badge-tech">CSS</span>
+            <span class="badge-tech">JS</span>
+            <span class="badge-tech">Bootstrap</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj2-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Overview</div>
+              <div class="cs-content">
+                Corporate website for a Saudi Arabian construction company, showcasing services and projects.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech">HTML</span>
+                  <span class="badge-tech">CSS</span>
+                  <span class="badge-tech">JavaScript</span>
+                  <span class="badge-tech">Bootstrap</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="outcome-highlight">
+            <div class="cs-label mb-2"><i class="bi bi-link"></i> Links</div>
+            <div class="d-flex gap-3">
+              <a href="https://www.atcc-ksa.com" target="_blank" class="btn-primary-cta" style="padding:8px 16px;font-size:0.85rem;">
+                <i class="bi bi-box-arrow-up-right"></i> Live Demo
+              </a>
+              <a href="https://github.com/Mohammad-Abo-Al-Ghozlan/altc.git" target="_blank" class="btn-secondary-cta" style="padding:8px 16px;font-size:0.85rem;">
+                <i class="bi bi-github"></i> View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: SwissLife LB -->
+      <div class="project-item reveal" role="region" aria-label="SwissLife LB case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj3-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-capsule" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">SwissLife LB</div>
+              <div class="project-tagline">Pharmaceutical company website with product catalog</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">HTML</span>
+            <span class="badge-tech">CSS</span>
+            <span class="badge-tech">PHP</span>
+            <span class="badge-tech">MySQL</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj3-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Overview</div>
+              <div class="cs-content">
+                Pharmaceutical company website with product catalog and ordering system.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech">HTML</span>
+                  <span class="badge-tech">CSS</span>
+                  <span class="badge-tech accent">PHP</span>
+                  <span class="badge-tech accent">MySQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="outcome-highlight">
+            <div class="cs-label mb-2"><i class="bi bi-link"></i> Links</div>
+            <div class="d-flex gap-3">
+              <a href="https://www.swisslifelb.com" target="_blank" class="btn-primary-cta" style="padding:8px 16px;font-size:0.85rem;">
+                <i class="bi bi-box-arrow-up-right"></i> Live Demo
+              </a>
+              <a href="https://github.com/Mohammad-Abo-Al-Ghozlan/swisslifelb.git" target="_blank" class="btn-secondary-cta" style="padding:8px 16px;font-size:0.85rem;">
+                <i class="bi bi-github"></i> View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4: ERP & Accounting System -->
+      <div class="project-item reveal" role="region" aria-label="ERP and Accounting System case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj4-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-bar-chart-steps" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">ERP & Accounting System</div>
+              <div class="project-tagline">Comprehensive business management solution</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">Laravel</span>
+            <span class="badge-tech">React</span>
+            <span class="badge-tech">MySQL</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj4-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Problem</div>
+              <div class="cs-content">
+                SME clients in Lebanon were managing finances, inventory, and HR across disconnected spreadsheets — leading to accounting errors and stock discrepancies.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-person-gear"></i> My Role</div>
+              <div class="cs-content">
+                Co-Founder and lead developer at IMAA. Responsible for full system design, database schema, REST API development, and React frontend.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-diagram-3"></i> Architecture</div>
+              <div class="cs-content">
+                Laravel backend with RESTful API layer, role-based access control (RBAC), and React SPA frontend. MySQL relational schema for accounts, inventory, employees, and transactions.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech accent">Laravel</span>
+                  <span class="badge-tech accent">React</span>
+                  <span class="badge-tech accent">MySQL</span>
+                  <span class="badge-tech">REST API</span>
+                  <span class="badge-tech">RBAC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5: School Management System -->
+      <div class="project-item reveal" role="region" aria-label="School Management System case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj5-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-mortarboard" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">School Management System</div>
+              <div class="project-tagline">Student records and fee collection automation</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">Laravel</span>
+            <span class="badge-tech">JavaScript</span>
+            <span class="badge-tech">MySQL</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj5-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Overview</div>
+              <div class="cs-content">
+                Automated student records, attendance tracking, grade calculation, and fee collection system for educational institutions.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech accent">Laravel</span>
+                  <span class="badge-tech">JavaScript</span>
+                  <span class="badge-tech accent">MySQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 6: Invoice Management System -->
+      <div class="project-item reveal" role="region" aria-label="Invoice Management System case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj6-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">Invoice Management System</div>
+              <div class="project-tagline">Complete invoicing solution for UAE SNS company</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">React</span>
+            <span class="badge-tech">Node.js</span>
+            <span class="badge-tech">MySQL</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj6-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Problem</div>
+              <div class="cs-content">
+                A UAE-based SNS company needed a centralized invoicing platform to replace fragmented Word templates and manual follow-ups.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-person-gear"></i> My Role</div>
+              <div class="cs-content">
+                Lead developer. Gathered requirements remotely, delivered the system, handled deployment across time zones.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech accent">React</span>
+                  <span class="badge-tech">Node.js</span>
+                  <span class="badge-tech accent">MySQL</span>
+                  <span class="badge-tech">PDF Export</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 7: Online Food Ordering System -->
+      <div class="project-item reveal" role="region" aria-label="Online Food Ordering System case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj7-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-basket" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">Online Food Ordering System</div>
+              <div class="project-tagline">Complete e-commerce platform with cart and checkout</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">PHP</span>
+            <span class="badge-tech">JavaScript</span>
+            <span class="badge-tech">MySQL</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj7-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Overview</div>
+              <div class="cs-content">
+                Complete shopping platform with product management, cart functionality, and checkout process.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech accent">PHP</span>
+                  <span class="badge-tech">JavaScript</span>
+                  <span class="badge-tech accent">MySQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="outcome-highlight">
+            <div class="cs-label mb-2"><i class="bi bi-link"></i> Links</div>
+            <a href="https://github.com/Mohammad-Abo-Al-Ghozlan/Online-Food-Ordering-System.git" target="_blank" class="btn-secondary-cta" style="padding:8px 16px;font-size:0.85rem;">
+              <i class="bi bi-github"></i> View Code
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 8: Garage Management System -->
+      <div class="project-item reveal" role="region" aria-label="Garage Management System case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj8-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-tools" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">Garage Management System</div>
+              <div class="project-tagline">Workflow automation for auto repair shops</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">Angular</span>
+            <span class="badge-tech">TypeScript</span>
+            <span class="badge-tech">PHP</span>
+            <span class="badge-tech">MySQL</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj8-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Overview</div>
+              <div class="cs-content">
+                Workflow automation system for mechanics and auto repair shops with job tracking and inventory management.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech accent">Angular</span>
+                  <span class="badge-tech">TypeScript</span>
+                  <span class="badge-tech">PHP</span>
+                  <span class="badge-tech accent">MySQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 9: Society Management Mobile App -->
+      <div class="project-item reveal" role="region" aria-label="Society Management Mobile App case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj9-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-phone" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">Society Management Mobile App</div>
+              <div class="project-tagline">Residential society management with Flutter</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">Flutter</span>
+            <span class="badge-tech">PHP</span>
+            <span class="badge-tech">MySQL</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj9-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Overview</div>
+              <div class="cs-content">
+                Comprehensive solution for managing residential societies with events, complaints, payments, and resident communications.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech accent">Flutter</span>
+                  <span class="badge-tech">PHP</span>
+                  <span class="badge-tech accent">MySQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 10: Shawidarsa Restaurant -->
+      <div class="project-item reveal" role="region" aria-label="Shawidarsa Restaurant case study">
+        <div class="project-header" onclick="toggleProject(this)" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="proj10-body" onkeydown="handleProjectKey(event,this)">
+          <div class="project-header-left">
+            <div class="project-icon-wrap"><i class="bi bi-shop" aria-hidden="true"></i></div>
+            <div>
+              <div class="project-name">Shawidarsa Restaurant</div>
+              <div class="project-tagline">Online restaurant menu for Saudi Arabian restaurant</div>
+            </div>
+          </div>
+          <div class="project-tags d-none d-md-flex">
+            <span class="badge-tech">HTML</span>
+            <span class="badge-tech">CSS</span>
+            <span class="badge-tech">JS</span>
+            <span class="badge-tech">PHP</span>
+          </div>
+          <i class="bi bi-chevron-down project-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="project-body" id="proj10-body">
+          <div class="case-study-grid">
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-exclamation-circle"></i> Overview</div>
+              <div class="cs-content">
+                Online restaurant menu and ordering system for a Saudi Arabian restaurant.
+              </div>
+            </div>
+            <div class="case-study-block">
+              <div class="cs-label"><i class="bi bi-cpu"></i> Stack</div>
+              <div class="cs-content">
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="badge-tech">HTML</span>
+                  <span class="badge-tech">CSS</span>
+                  <span class="badge-tech">JavaScript</span>
+                  <span class="badge-tech">PHP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="outcome-highlight">
+            <div class="cs-label mb-2"><i class="bi bi-link"></i> Links</div>
+            <a href="https://shawidarsa.restaurant" target="_blank" class="btn-primary-cta" style="padding:8px 16px;font-size:0.85rem;">
+              <i class="bi bi-box-arrow-up-right"></i> Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       EXPERIENCE SECTION (with all jobs from index)
+  ============================================ -->
+  <section id="experience" class="section-gap" aria-labelledby="experience-heading">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="reveal sticky-top" style="top: 80px;">
+            <span class="section-label">Career History</span>
+            <h2 class="section-title" id="experience-heading">Professional<br/>Experience</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">
+              A track record of delivering production software across diverse industries and regional markets.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <div class="timeline reveal">
+
+            <!-- Job 1: Full-Stack Development Intern -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div>
+                    <div class="timeline-role">Full-Stack Development Intern</div>
+                    <div class="timeline-company">The Digital Hub</div>
+                  </div>
+                  <span class="timeline-period">Jan 2026 – Present</span>
+                </div>
+                <div class="timeline-location">
+                  <i class="bi bi-geo-alt"></i> On-site, Lebanon
+                </div>
+                <ul class="timeline-bullets">
+                  <li>Develop and maintain full-stack web applications using modern frontend and backend technologies</li>
+                  <li>Build reusable, responsive UI components with performance and UX in mind</li>
+                  <li>Integrate REST APIs and manage data flow between frontend and backend systems</li>
+                  <li>Collaborate with designers and senior developers to deliver scalable solutions</li>
+                  <li>Participate in debugging, optimization, and code reviews</li>
+                </ul>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <span class="badge-tech">Full Stack</span>
+                  <span class="badge-tech">React</span>
+                  <span class="badge-tech">API</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job 2: Full-Stack Developer / Team Lead -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div>
+                    <div class="timeline-role">Full-Stack Developer / Team Lead</div>
+                    <div class="timeline-company">AFKAR ALBARMAJAH FOR IT</div>
+                  </div>
+                  <span class="timeline-period">Jul 2025 – Present</span>
+                </div>
+                <div class="timeline-location">
+                  <i class="bi bi-geo-alt"></i> Remote (Saudi Arabia)
+                </div>
+                <ul class="timeline-bullets">
+                  <li>Lead a team of developers delivering full-stack web applications</li>
+                  <li>Design and develop systems using Laravel, React, and MySQL</li>
+                  <li>Manage task distribution, code reviews, and delivery timelines</li>
+                  <li>Coordinate directly with stakeholders to translate requirements into technical solutions</li>
+                  <li>Notable Project: Afkar Al-Tatweer (<a href="https://www.atcc-ksa.com" target="_blank" style="color:var(--accent);">atcc-ksa.com</a>)</li>
+                </ul>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <span class="badge-tech">Laravel</span>
+                  <span class="badge-tech">React</span>
+                  <span class="badge-tech">Team Lead</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job 3: Application Administrator -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div>
+                    <div class="timeline-role">Application Administrator</div>
+                    <div class="timeline-company">Media Vision</div>
+                  </div>
+                  <span class="timeline-period">Jun 2025 – Jan 2026</span>
+                </div>
+                <div class="timeline-location">
+                  <i class="bi bi-geo-alt"></i> Remote, Lebanon
+                </div>
+                <ul class="timeline-bullets">
+                  <li>Managed and optimized internal media applications</li>
+                  <li>Monitored system performance and resolved technical issues</li>
+                  <li>Coordinated between technical teams and end users</li>
+                </ul>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <span class="badge-tech">System Admin</span>
+                  <span class="badge-tech">Support</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job 4: Software & Hardware Maintenance Technician -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div>
+                    <div class="timeline-role">Software & Hardware Maintenance Technician</div>
+                    <div class="timeline-company">CLICKONCE</div>
+                  </div>
+                  <span class="timeline-period">Oct 2024 – Dec 2025</span>
+                </div>
+                <div class="timeline-location">
+                  <i class="bi bi-geo-alt"></i> Lebanon
+                </div>
+                <ul class="timeline-bullets">
+                  <li>Provided software troubleshooting and system maintenance</li>
+                  <li>Performed hardware diagnostics, repairs, and installations</li>
+                  <li>Delivered IT support for business clients</li>
+                </ul>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <span class="badge-tech">IT Support</span>
+                  <span class="badge-tech">Hardware</span>
+                  <span class="badge-tech">Troubleshooting</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job 5: Full-Stack Developer (IMAA) -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div>
+                    <div class="timeline-role">Full-Stack Developer</div>
+                    <div class="timeline-company">IMAA</div>
+                  </div>
+                  <span class="timeline-period">Aug 2024 – Present</span>
+                </div>
+                <div class="timeline-location">
+                  <i class="bi bi-geo-alt"></i> Lebanon
+                </div>
+                <ul class="timeline-bullets">
+                  <li>Built production-ready web applications for real clients</li>
+                  <li>Developed ERP, accounting, school, and invoice management systems</li>
+                  <li>Delivered responsive, scalable, and maintainable solutions</li>
+                  <li>Notable Project: <a href="https://www.swisslifelb.com" target="_blank" style="color:var(--accent);">SwissLifeLB.com</a> – E-commerce for pharmaceutical company</li>
+                  <li>Notable Project: <a href="https://shawidarsa.restaurant" target="_blank" style="color:var(--accent);">Shawidarsa Restaurant</a> – Online restaurant menu for Saudi restaurant</li>
+                </ul>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <span class="badge-tech">Laravel</span>
+                  <span class="badge-tech">PHP</span>
+                  <span class="badge-tech">MySQL</span>
+                  <span class="badge-tech">React</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job 6: Web Development Intern -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div>
+                    <div class="timeline-role">Web Development Intern</div>
+                    <div class="timeline-company">World of Business</div>
+                  </div>
+                  <span class="timeline-period">May 2024 – Jul 2024</span>
+                </div>
+                <div class="timeline-location">
+                  <i class="bi bi-geo-alt"></i> Saida, Lebanon
+                </div>
+                <ul class="timeline-bullets">
+                  <li>Worked on React frontend and Laravel backend (Genix project)</li>
+                  <li>Implemented e-commerce and user management features</li>
+                  <li>Gained experience with WordPress development</li>
+                </ul>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <span class="badge-tech">React</span>
+                  <span class="badge-tech">Laravel</span>
+                  <span class="badge-tech">WordPress</span>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /timeline -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       STRENGTHS SECTION
+  ============================================ -->
+  <section id="strengths" class="section-gap" aria-labelledby="strengths-heading">
+    <div class="container">
+
+      <div class="reveal text-center mb-5">
+        <span class="section-label" style="justify-content:center;display:flex;">Engineering Profile</span>
+        <h2 class="section-title" id="strengths-heading" style="color:#fff;">Technical Strengths</h2>
+        <div class="section-divider mx-auto"></div>
+        <p class="section-subtitle mx-auto" style="color:rgba(248,249,252,0.6);">
+          Capabilities that differentiate me as an engineer — beyond the tech stack.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="strength-item">
+            <div class="strength-icon"><i class="bi bi-stack" aria-hidden="true"></i></div>
+            <div>
+              <div class="strength-title">Full Ownership, End-to-End</div>
+              <p class="strength-desc">I take projects from requirements gathering through architecture, development, deployment, and ongoing support. No handoff bottlenecks.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="strength-item">
+            <div class="strength-icon"><i class="bi bi-people-fill" aria-hidden="true"></i></div>
+            <div>
+              <div class="strength-title">Team Lead & Code Review</div>
+              <p class="strength-desc">Experience managing developers, conducting code reviews, and establishing engineering workflows on cross-border remote teams.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="strength-item">
+            <div class="strength-icon"><i class="bi bi-diagram-3-fill" aria-hidden="true"></i></div>
+            <div>
+              <div class="strength-title">Business Domain Modeling</div>
+              <p class="strength-desc">Skilled at translating complex client workflows into clean relational schemas and maintainable application logic — for ERP, POS, and SaaS contexts.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="strength-item">
+            <div class="strength-icon"><i class="bi bi-shield-lock-fill" aria-hidden="true"></i></div>
+            <div>
+              <div class="strength-title">Auth & Security Systems</div>
+              <p class="strength-desc">Designed and implemented RBAC, JWT, session-based auth, and permission systems for multi-user enterprise applications.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="strength-item">
+            <div class="strength-icon"><i class="bi bi-globe-americas" aria-hidden="true"></i></div>
+            <div>
+              <div class="strength-title">Cross-Regional Delivery</div>
+              <p class="strength-desc">Delivered production projects for clients in Lebanon, Saudi Arabia, and UAE — managing different time zones, cultural contexts, and requirements.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="strength-item">
+            <div class="strength-icon"><i class="bi bi-chat-dots-fill" aria-hidden="true"></i></div>
+            <div>
+              <div class="strength-title">Client Communication</div>
+              <p class="strength-desc">Fluent in Arabic and English, with experience gathering requirements and delivering technical explanations to non-technical stakeholders.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Certifications row -->
+      <div class="mt-5 reveal">
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius-lg);padding:28px;">
+          <div class="cs-label mb-3" style="color:var(--accent);">
+            <i class="bi bi-patch-check-fill"></i> Education & Certifications
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge-tech" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(248,249,252,0.8);">
+              B.S. Computer Science — LIU, 2024
+            </span>
+            <span class="badge-tech" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(248,249,252,0.8);">
+              JavaScript Essentials — Cisco
+            </span>
+            <span class="badge-tech" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(248,249,252,0.8);">
+              CCNA 1 & 2 — Cisco
+            </span>
+            <span class="badge-tech" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(248,249,252,0.8);">
+              Cybersecurity Essentials — Cisco
+            </span>
+            <span class="badge-tech" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(248,249,252,0.8);">
+              Google IT Support
+            </span>
+            <span class="badge-tech" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(248,249,252,0.8);">
+              Linux Essentials
+            </span>
+            <span class="badge-tech" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(248,249,252,0.8);">
+              HTML5 & CSS3 — Pirple
+            </span>
+            <span class="badge-tech" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(248,249,252,0.8);">
+              JavaScript Algorithms — freeCodeCamp
+            </span>
+            <span class="badge-tech" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(248,249,252,0.8);">
+              Scientific Computing with Python — freeCodeCamp
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       CONTACT SECTION
+  ============================================ -->
+  <section id="contact" class="section-gap" aria-labelledby="contact-heading">
+    <div class="container">
+
+      <div class="reveal text-center mb-5">
+        <span class="section-label" style="justify-content:center;display:flex;">Ready to Work Together</span>
+        <h2 class="section-title" id="contact-heading">Let's Build Something</h2>
+        <div class="section-divider mx-auto"></div>
+        <p class="section-subtitle mx-auto">
+          Open to full-time roles, contract projects, and remote positions across the MENA region and beyond.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+
+        <!-- Contact Info -->
+        <div class="col-lg-4 col-md-5 reveal">
+          <div class="contact-card h-100">
+            <h3 style="font-size:1rem;font-weight:700;margin-bottom:24px;color:var(--text-primary);">
+              Contact Information
+            </h3>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
+              <div>
+                <div class="contact-info-label">Email</div>
+                <div class="contact-info-value">
+                  abo.al.ghozlan.mohammad@gmail.com
+                  <button class="btn-copy" id="copyEmailBtn" onclick="copyEmail()" aria-label="Copy email address">
+                    <i class="bi bi-copy"></i> Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div>
+              <div>
+                <div class="contact-info-label">Phone</div>
+                <div class="contact-info-value">+961 81 985 614</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+              <div>
+                <div class="contact-info-label">Location</div>
+                <div class="contact-info-value">Lebanon (Remote-Ready)</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="bi bi-download"></i></div>
+              <div>
+                <div class="contact-info-label">Resume</div>
+                <div class="contact-info-value">
+                  <a href="images/Mohammad Abo Al Ghozlan - resume.pdf" download style="color:var(--accent);">
+                    Download CV <i class="bi bi-box-arrow-up-right ms-1" style="font-size:0.7rem;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <hr style="border-color:var(--border);margin:20px 0;" />
+
+            <div class="d-flex gap-3">
+              <a href="https://www.linkedin.com/in/mohammad-abo-al-ghozlan" target="_blank" rel="noopener"
+                 class="social-link" aria-label="LinkedIn Profile">
+                <i class="bi bi-linkedin"></i>
+              </a>
+              <a href="https://github.com/Mohammad-Abo-Al-Ghozlan" target="_blank" rel="noopener"
+                 class="social-link" aria-label="GitHub Profile">
+                <i class="bi bi-github"></i>
+              </a>
+              <a href="https://www.instagram.com/mohamadhaitham5/" target="_blank" rel="noopener"
+                 class="social-link" aria-label="Instagram">
+                <i class="bi bi-instagram"></i>
+              </a>
+              <a href="https://wa.me/96181985614" target="_blank" rel="noopener"
+                 class="social-link" aria-label="WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-lg-6 col-md-7 reveal">
+          <div class="contact-card">
+            <h3 style="font-size:1rem;font-weight:700;margin-bottom:24px;color:var(--text-primary);">
+              Send a Message
+            </h3>
+
+            <div id="formSuccess" class="form-success" role="alert">
+              <i class="bi bi-check-circle-fill me-2"></i>
+              Message received! I'll get back to you within 24 hours.
+            </div>
+
+            <form id="contactForm" novalidate>
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label class="form-label" for="contactName">Full Name *</label>
+                  <input type="text" class="form-control" id="contactName"
+                         placeholder="Jane Smith" required />
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="contactEmail">Email Address *</label>
+                  <input type="email" class="form-control" id="contactEmail"
+                         placeholder="jane@company.com" required />
+                  <div class="invalid-feedback">Please enter a valid email.</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="contactPhone">Phone Number</label>
+                  <input type="text" class="form-control" id="contactPhone"
+                         placeholder="+961 81 985 614" />
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="contactSubject">Subject *</label>
+                  <select class="form-control" id="contactSubject" required>
+                    <option value="">Select a topic...</option>
+                    <option value="fulltime">Full-time role opportunity</option>
+                    <option value="contract">Contract / freelance project</option>
+                    <option value="collaboration">Collaboration inquiry</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <div class="invalid-feedback">Please select a subject.</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="contactMessage">Message *</label>
+                  <textarea class="form-control" id="contactMessage"
+                            placeholder="Tell me about your project or role..." required></textarea>
+                  <div class="invalid-feedback">Please write your message.</div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn-submit" id="submitBtn">
+                    <i class="bi bi-send-fill" aria-hidden="true"></i>
+                    Send Message
+                  </button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       FOOTER
+  ============================================ -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-4">
+        <div>
+          <div class="footer-text" style="color:#fff;font-weight:700;margin-bottom:4px;">
+            Mohammad Abo Al Ghozlan
+          </div>
+          <div class="footer-text">
+            Full Stack Developer · Lebanon · Open to Remote
+          </div>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <hr style="border-color:rgba(255,255,255,0.07);margin:24px 0 16px;" />
+      <div class="footer-text text-center">
+        © 2026 MoGhoz. Built with HTML5, CSS3 & Bootstrap 5.
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+  <script>
+    /* ============================================
+       NAVBAR: scroll shadow + active section highlighting
+    ============================================ */
+    (function initNavbar() {
+      const nav = document.getElementById('mainNav');
+      const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+      const sections = document.querySelectorAll('section[id]');
+
+      /* Scrolled class for shadow */
+      function onScroll() {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+        highlightActiveSection();
+      }
+
+      /* Active nav link based on scroll position */
+      function highlightActiveSection() {
+        let current = '';
+        sections.forEach(section => {
+          const top = section.offsetTop - 90;
+          if (window.scrollY >= top) current = section.id;
+        });
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* ============================================
+       SCROLL REVEAL — Intersection Observer
+    ============================================ */
+    (function initReveal() {
+      const elements = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      elements.forEach(el => observer.observe(el));
+    })();
+
+    /* ============================================
+       PROJECT EXPAND / COLLAPSE
+    ============================================ */
+    function toggleProject(headerEl) {
+      const projectItem = headerEl.closest('.project-item');
+      const isOpen = projectItem.classList.contains('open');
+
+      /* Close all other open items */
+      document.querySelectorAll('.project-item.open').forEach(item => {
+        if (item !== projectItem) {
+          item.classList.remove('open');
+          item.querySelector('.project-header').setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      /* Toggle current */
+      projectItem.classList.toggle('open', !isOpen);
+      headerEl.setAttribute('aria-expanded', String(!isOpen));
+    }
+
+    /* Keyboard support for project headers */
+    function handleProjectKey(event, headerEl) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleProject(headerEl);
+      }
+    }
+
+    /* ============================================
+       COPY EMAIL BUTTON
+    ============================================ */
+    function copyEmail() {
+      const email = 'abo.al.ghozlan.mohammad@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        const btn = document.getElementById('copyEmailBtn');
+        btn.innerHTML = '<i class="bi bi-check2"></i> Copied!';
+        btn.style.color = 'var(--accent)';
+        btn.style.borderColor = 'var(--accent)';
+        setTimeout(() => {
+          btn.innerHTML = '<i class="bi bi-copy"></i> Copy';
+          btn.style.color = '';
+          btn.style.borderColor = '';
+        }, 2000);
+      }).catch(() => {
+        /* Fallback for non-https */
+        const el = document.createElement('textarea');
+        el.value = email;
+        el.style.position = 'fixed';
+        el.style.opacity = '0';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+      });
+    }
+
+    /* ============================================
+       CONTACT FORM - WhatsApp integration
+    ============================================ */
+    (function initForm() {
+      const form = document.getElementById('contactForm');
+      const successMsg = document.getElementById('formSuccess');
+      const submitBtn = document.getElementById('submitBtn');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        /* Validate all fields */
+        let valid = true;
+        const fields = form.querySelectorAll('[required]');
+
+        fields.forEach(field => {
+          field.classList.remove('is-invalid', 'is-valid');
+
+          let fieldValid = false;
+          if (field.type === 'email') {
+            fieldValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+          } else {
+            fieldValid = field.value.trim().length > 0;
+          }
+
+          if (!fieldValid) {
+            field.classList.add('is-invalid');
+            valid = false;
+          } else {
+            field.classList.add('is-valid');
+          }
+        });
+
+        if (!valid) return;
+
+        // Get form values
+        const name = document.getElementById("contactName").value;
+        const email = document.getElementById("contactEmail").value;
+        const phone = document.getElementById("contactPhone").value;
+        const subject = document.getElementById("contactSubject").value;
+        const message = document.getElementById("contactMessage").value;
+
+        // Format message for WhatsApp
+        const whatsappMessage =
+          `*New Contact Form Submission*%0A%0A` +
+          `*Name:* ${name}%0A` +
+          `*Email:* ${email}%0A` +
+          `*Phone:* ${phone || 'Not provided'}%0A` +
+          `*Subject:* ${subject}%0A%0A` +
+          `*Message:*%0A${message}`;
+
+        // Create WhatsApp link with your number (81985614)
+        const whatsappLink = `https://wa.me/96181985614?text=${whatsappMessage}`;
+
+        // Open WhatsApp in a new tab
+        window.open(whatsappLink, "_blank");
+
+        // Show success message
+        successMsg.style.display = 'block';
+        successMsg.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> Redirecting to WhatsApp...';
+        
+        // Reset form
+        form.reset();
+        fields.forEach(f => f.classList.remove('is-valid', 'is-invalid'));
+
+        // Hide success message after 5 seconds
+        setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+      });
+
+      /* Live validation on blur */
+      form.querySelectorAll('.form-control, .form-select').forEach(field => {
+        field.addEventListener('blur', function() {
+          if (!this.hasAttribute('required')) return;
+          this.classList.remove('is-invalid', 'is-valid');
+          let fieldValid = this.type === 'email'
+            ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value.trim())
+            : this.value.trim().length > 0;
+          this.classList.add(fieldValid ? 'is-valid' : 'is-invalid');
+        });
+      });
+    })();
+
+    /* ============================================
+       CLOSE MOBILE NAV on link click
+    ============================================ */
+    document.querySelectorAll('#navMenu .nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const navCollapse = document.getElementById('navMenu');
+        const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      });
+    });
+  </script>
+
+</body>
+</html>
